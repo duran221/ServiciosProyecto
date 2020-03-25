@@ -21,6 +21,7 @@ namespace Dominio.EntidadesDelDominio.Abstractas
 
         protected Usuario(string cedula, string nombre, string apellido, DateTime? fecha, string nacionalidad, string genero)
         {
+
             Cedula = cedula;
             Nombre = nombre;
             Apellido = apellido;
