@@ -25,14 +25,14 @@ namespace APIRest.APIRestService
 
         public int estadoAlojamiento(int idAlojamiento, int estado)
         {
-           return control.estadoAlojamiento(idAlojamiento,estado);
+            return control.estadoAlojamiento(idAlojamiento, estado);
         }
 
-        
+
 
         public Alojamiento listaAlojamiento(int idAlojamoiento)
         {
-           return control.listaAlojamiento(idAlojamoiento);
+            return control.listaAlojamiento(idAlojamoiento);
         }
 
         public Arrendador listaArredandor(string cedula)
@@ -42,50 +42,50 @@ namespace APIRest.APIRestService
 
         public Arrendatario listaArrendatario(string cedula)
         {
-           return control.listaArrendatario(cedula);
+            return control.listaArrendatario(cedula);
         }
         public JObject InformacionAlojamientoGeneral(int idAlojamiento, String arrendador, String arrendatario)
         {
             Alojamiento Alojamiento = this.listaAlojamiento(idAlojamiento);
-            Arrendador Arrendador =this.listaArredandor(arrendador);
+            Arrendador Arrendador = this.listaArredandor(arrendador);
             Arrendatario Arrendatario = this.listaArrendatario(arrendatario);
-            return this.InformacionAlquilado(Alojamiento,Arrendador,Arrendatario);
+            return this.InformacionAlquilado(Alojamiento, Arrendador, Arrendatario);
 
         }
         public JObject InformacionAlquilado(Alojamiento alojamiento, Arrendador arrendador, Arrendatario arrendatario)
         {
-            if(this.estadoAlojamiento(alojamiento.IdAlojamiento, alojamiento.Estado)==1)
+            if (this.estadoAlojamiento(alojamiento.IdAlojamiento,alojamiento.Estado) == 1)
             {
                 return JObject.FromObject(new
                 {
-                    alojamiento= new
+                    alojamiento = new
                     {
-                        idAlojamiento=alojamiento.IdAlojamiento,
-                        titulo=alojamiento.Titulo,
-                        tipoAlojamiento=alojamiento.TipoAlojamiento,
-                        precio= alojamiento.Precio,
-                        estado= alojamiento.Estado
+                        idAlojamiento = alojamiento.IdAlojamiento,
+                        titulo = alojamiento.Titulo,
+                        tipoAlojamiento = alojamiento.TipoAlojamiento,
+                        precio = alojamiento.Precio,
+                        estado = alojamiento.Estado
                     },
-                    arrendador =new
+                    arrendador = new
                     {
-                        idArredandor= arrendador.IdArrendador,
-                        cedulaArrendador= arrendador.Cedula,
-                        nombreArrendador=arrendador.Nombre,
-                        apellidoArrendador= arrendador.Apellido
+                        idArredandor = arrendador.IdArrendador,
+                        cedulaArrendador = arrendador.Cedula,
+                        nombreArrendador = arrendador.Nombre,
+                        apellidoArrendador = arrendador.Apellido
                     },
                     arrendatario = new
                     {
                         idArrendatario = arrendatario.IdArrendatario,
-                        cedulaArrendatario= arrendatario.Cedula,
-                        nombrearrendatario= arrendatario.Nombre,
-                        apellidoArrendatario= arrendatario.Apellido,
-                        fechaArrendatario= arrendatario.Fecha,
-                        generoArrendatario= arrendatario.Genero
-                     
+                        cedulaArrendatario = arrendatario.Cedula,
+                        nombrearrendatario = arrendatario.Nombre,
+                        apellidoArrendatario = arrendatario.Apellido,
+                        fechaArrendatario = arrendatario.Fecha,
+                        generoArrendatario = arrendatario.Genero
+
                     }
 
                 });
-                
+
             }
             else
             {
@@ -104,8 +104,8 @@ namespace APIRest.APIRestService
 
         public Boolean ingresarDatosFaltantes(int numeroContrato, int numeroMeses, decimal pagoMensual, string fechaAlquiler, int idAlojamiento)
         {
-            return control.ingresarDatosFaltantes(numeroContrato,numeroMeses,pagoMensual,fechaAlquiler,idAlojamiento);
-           
+            //return control.ingresarDatosFaltantes(numeroContrato, numeroMeses, pagoMensual, fechaAlquiler, idAlojamiento);
+            return true;
         }
 
 

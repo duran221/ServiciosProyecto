@@ -8,11 +8,11 @@ namespace Dominio.EntidadesDelDominio.Entidades
 {
     public class Alquiler
     {
-        public DateTime FechaAlquiler { get; set; }
-        public int NumeroContrato { get; set; }
-        public  byte numeroMeses;
-        public Alojamiento alojamiento;
-        double pagoMensual;
+        DateTime FechaAlquiler { get; set; }
+        int NumeroContrato { get; set; }
+        private byte numeroMeses;
+        Alojamiento alojamiento;
+        private double pagoMensual;
 
 
         public Alquiler(DateTime fechaAlquiler, int numeroContrato, byte numeroMeses, double pagoMensual)
@@ -22,10 +22,6 @@ namespace Dominio.EntidadesDelDominio.Entidades
             this.NumeroMeses = numeroMeses;
             this.PagoMensual = pagoMensual;
 
-        }
-
-        public Alquiler()
-        {
         }
 
         public byte NumeroMeses

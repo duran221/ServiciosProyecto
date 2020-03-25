@@ -10,11 +10,17 @@ namespace Negocio.ILogicaNegocio
 {
     public interface IControlAlquilerAlojamiento
     {
+
         int estadoAlojamiento(int idAlojamiento, int estado);
+
         Alojamiento listaAlojamiento(int idAlojamoiento);
         Arrendador listaArredandor(string cedula);
         Arrendatario listaArrendatario(string cedula);
-        Boolean ingresarDatosFaltantes(int numeroContrato, int numeroMeses, Decimal pagoMensual, string fechaAlquiler, int idAlojamiento);
+        IList<Alojamiento> mostrarInformacionAlojamiento(int idAlojamiento, String cedulaArrendatario, String cedulaArrendador);
+
+
+
+
 
     }
 }

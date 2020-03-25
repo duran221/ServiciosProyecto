@@ -12,8 +12,8 @@ using Datos;
 
 namespace Negocio.ControlRepository
 {
-   public class ControlTomarAlquilerAlojamiento : IControlAlquilerAlojamiento
-   {
+    public class ControlTomarAlquilerAlojamiento : IControlAlquilerAlojamiento
+    {
 
         public int estadoAlojamiento(int idAlojamiento, int estado)
         {
@@ -37,37 +37,29 @@ namespace Negocio.ControlRepository
                                         {
                                             IdAlojamiento = alojamiento.idAlojamiento,
                                             Titulo = alojamiento.titulo,
-                                            Precio = (double)alojamiento.precio,
-                                            TipoAlojamiento = alojamiento.tipoAlojamiento,
-                                            CedulaArrendador = alojamiento.cedulaArrendador,
-                                            Estado = (int)alojamiento.estado
-                                        });
+                                            Precio = (double)alojamiento.precio
+                                        }).First();
 
-                return listaAlojamiento.First();
-                                                                                                
+                return listaAlojamiento;
+
             }
         }
 
         public Arrendador listaArredandor(string cedula)
         {
-            using(RoomServicesEntities entidades = new RoomServicesEntities())
+            using (RoomServicesEntities entidades = new RoomServicesEntities())
             {
-                var listaArredador = (from arrendador in entidades.Arrendadores join user in entidades.Usuarios
-                                      on arrendador.cedula equals user.cedula                                      
-                                      where ((arrendador.cedula.Equals( cedula)))
-                                      select new Arrendador()
+                var listaArredador = (from arrendador in entidades.Arrendadores
+                                      join user in entidades.Usuarios
+                                      on arrendador.cedula equals user.cedula
+                                      where ((arrendador.cedula == cedula))
+                                      select new Arrendador(user.cedula, user.nombre, user.apellido, user.fechaNacimiento, user.nacionalidad, user.genero)
                                       {
-                                          Cedula = user.cedula,
-                                          Nombre = user.nombre,
-                                          Apellido = user.apellido,
-                                          Fecha = user.fechaNacimiento,
-                                          Nacionalidad = user.nacionalidad,
-                                          Genero = user.genero,
                                           IdArrendador = arrendador.idArrendador
 
-                                      });
+                                      }).First();
 
-                return listaArredador.First();
+                return listaArredador;
             }
         }
 
@@ -75,63 +67,34 @@ namespace Negocio.ControlRepository
         {
             using (RoomServicesEntities entidades = new RoomServicesEntities())
             {
-                var listaArrendatario = (from arrendatario in entidades.Arrendatarios join user in entidades.Usuarios
-                                     on arrendatario.cedulaArrendatario equals user.cedula
-                                         where ((arrendatario.cedulaArrendatario.Equals( cedula)))
-                                         select new Arrendatario()
+                var listaArrendatario = (from arrendatario in entidades.Arrendatarios
+                                         join user in entidades.Usuarios
+on arrendatario.cedulaArrendatario equals user.cedula
+                                         where ((arrendatario.cedulaArrendatario == cedula))
+                                         select new Arrendatario(user.cedula, user.nombre, user.apellido, user.fechaNacimiento, user.nacionalidad, user.genero, arrendatario.tipoArrendador)
                                          {
-                                             Cedula=arrendatario.cedulaArrendatario,
-                                             Nombre=arrendatario.Usuarios.nombre,
-                                             Apellido=arrendatario.Usuarios.apellido,
-                                             Fecha = arrendatario.Usuarios.fechaNacimiento,
-                                             Genero =arrendatario.Usuarios.genero,
-                                             Nacionalidad = arrendatario.Usuarios.nacionalidad,
-                                             TipoArrendador=arrendatario.tipoArrendador,
                                              IdArrendatario = arrendatario.idArrendatario
 
-                                         });
+                                         }).First();
 
-                return listaArrendatario.First();
+                return listaArrendatario;
             }
         }
 
-        public Boolean ingresarDatosFaltantes(int numeroContrato, int numeroMeses, Decimal pagoMensual, string fechaAlquiler, int idAlojamiento)
+        public IList<Alojamiento> mostrarInformacionAlojamiento(int idAlojamiento, string cedulaArrendatario, string cedulaArrendador)
         {
-            var alojamiento = this.listaAlojamiento(idAlojamiento);
-
-            if (this.estadoAlojamiento(alojamiento.IdAlojamiento, alojamiento.Estado) == 1)
-            {
-                using (RoomServicesEntities entidades = new RoomServicesEntities())
-                {
-                    AlquilersAlojamientos alquila = new AlquilersAlojamientos()
-                    {
-                        numeroContrato = numeroContrato,
-                        numeroMeses = numeroMeses,
-                        pagoMensual = pagoMensual,
-                        fechaAlquiler = fechaAlquiler,
-                        idAlojamiento = alojamiento.IdAlojamiento
-
-                    };
-                    entidades.AlquilersAlojamientos.Add(alquila);
-
-                }
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            throw new NotImplementedException();
         }
 
         public int verAlojamiento(int estado)
         {
-            if(estado==0)
+            if (estado == 0)
             {
                 return 0;
             }
-           
+
             return 1;
-            
+
         }
 
     }
