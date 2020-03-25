@@ -5,36 +5,36 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-using APIRest.IServices;
-using APIRest.APIRestService;
-
 namespace APIRest.Controllers
 {
     public class RegistroUsuarioController : ApiController
     {
-        readonly IControlRegistroUsuario control;
-
-        public RegistroUsuarioController()
+        // GET: api/RegistroUsuario
+        public IEnumerable<string> Get()
         {
-            control = new APIRestService.ControlRegistrarUsuario();
+            return new string[] { "value1", "value2" };
         }
 
-      
-
-        // PUT: api/RegistroUsuario/5
-        public void Put(string cedula, string nombre, string apellido, DateTime? fecha, string nacionalidad, char genero)
+        // GET: api/RegistroUsuario/5
+        public string Get(int id)
         {
-            control.RegistrarUsuario(cedula,nombre,apellido,fecha,nacionalidad,genero);
-
+            return "value";
         }
-
 
         // POST: api/RegistroUsuario
-        public void Post(string cedula, string nombre, string apellido, DateTime? fecha, string nacionalidad, char genero)
+        public void Post([FromBody]string value)
         {
-            control.RegistrarUsuario(cedula, nombre, apellido, fecha, nacionalidad, genero);
         }
 
+        // PUT: api/RegistroUsuario/5
+        public void Put(int id, [FromBody]string value)
+        {
+
+        }
+
+        // DELETE: api/RegistroUsuario/5
+        public void Delete(int id)
+        {
+        }
     }
 }
-
